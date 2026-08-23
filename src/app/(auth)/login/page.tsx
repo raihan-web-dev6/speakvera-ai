@@ -360,7 +360,7 @@ export default function LoginPage() {
                   Password
                 </label>
 
-               /* 
+               
               </div>
 
               <div className="relative">
@@ -460,7 +460,7 @@ export default function LoginPage() {
           {/* REGISTER */}
 
           <p className="mt-7 text-center text-sm text-slate-500">
-            New to Speakvera?{" "}
+            New to Speakvera.?{" "}
 
             <Link
               href="/register"
