@@ -62,7 +62,15 @@ export async function proxy(
     pathname ===
       "/robots.txt" ||
     pathname ===
-      "/sitemap.xml"
+      "/sitemap.xml" ||
+    (
+      pathname.startsWith(
+        "/google"
+      ) &&
+      pathname.endsWith(
+        ".html"
+      )
+    )
   ) {
     return NextResponse.next();
   }
