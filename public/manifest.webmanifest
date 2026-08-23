@@ -1,0 +1,10 @@
+{
+  "name": "Speakvera AI",
+  "short_name": "Speakvera",
+  "description": "Practice English, get instant AI feedback, and build real speaking confidence.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb"
+}
