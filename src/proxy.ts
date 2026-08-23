@@ -35,13 +35,6 @@ export async function proxy(
    * =====================================================
    * PADDLE WEBHOOK
    * =====================================================
-   *
-   * Paddle does not have an Auth.js
-   * session.
-   *
-   * Security is handled inside the
-   * webhook route using Paddle's
-   * signature.
    */
 
   if (
@@ -76,7 +69,7 @@ export async function proxy(
 
   /*
    * =====================================================
-   * PUBLIC MARKETING ROUTES
+   * PUBLIC ROUTES
    * =====================================================
    */
 
@@ -144,6 +137,27 @@ export async function proxy(
 
   /*
    * =====================================================
+   * AUTH.JS PRODUCTION COOKIE
+   * =====================================================
+   *
+   * Local:
+   * authjs.session-token
+   *
+   * Production HTTPS:
+   * __Secure-authjs.session-token
+   */
+
+  const isProduction =
+    process.env.NODE_ENV ===
+    "production";
+
+  const cookieName =
+    isProduction
+      ? "__Secure-authjs.session-token"
+      : "authjs.session-token";
+
+  /*
+   * =====================================================
    * AUTH TOKEN
    * =====================================================
    */
@@ -156,6 +170,14 @@ export async function proxy(
       secret:
         process.env
           .AUTH_SECRET,
+
+      secureCookie:
+        isProduction,
+
+      cookieName,
+
+      salt:
+        cookieName,
     });
 
   /*
@@ -176,7 +198,8 @@ export async function proxy(
             "Unauthorized",
         },
         {
-          status: 401,
+          status:
+            401,
         }
       );
     }
@@ -222,6 +245,10 @@ export async function proxy(
       "/placement-test/"
     );
 
+  /*
+   * User has NOT finished onboarding.
+   */
+
   if (
     token.onboardingCompleted !==
       true &&
@@ -236,8 +263,7 @@ export async function proxy(
   }
 
   /*
-   * Learner already completed
-   * onboarding.
+   * User already completed onboarding.
    */
 
   if (

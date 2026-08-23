@@ -360,12 +360,7 @@ export default function LoginPage() {
                   Password
                 </label>
 
-               /* <Link
-                  href="/forgot-password"
-                  className="text-sm font-semibold text-blue-600 transition hover:text-blue-700"
-                >
-                  Forgot password?
-                </Link>
+               /* 
               </div>
 
               <div className="relative">
